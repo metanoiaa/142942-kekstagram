@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Nadi Ermakova](https://up.htmlacademy.ru/javascript/8/user/142942).
-* Наставник: `Неизвестно`.
+* Наставник: `Евгений Казаков`.
 
 ---
 
