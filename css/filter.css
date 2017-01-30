@@ -6,6 +6,6 @@
 
 .upload-filter-label-heat .upload-filter-preview,
 .filter-heat {
-  -webkit-filter: saturate(1);
-          filter: saturate(1);
+  -webkit-filter: contrast(150%);
+          filter: contrast(150%);
 }
