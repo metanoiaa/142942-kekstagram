@@ -35,7 +35,7 @@ formClose.addEventListener('click', function () {
 // Применим фильтры к изображению
 for (var i = 0; i < filters.length; i++) {
   filters[i].addEventListener('change', function () {
-    var className = this.id.replace('upload-', '');
+    var className = event.target.id.replace('upload-', '');
 
     for (var k = 0; k < imagePreview.classList.length; k++) {
       if (imagePreview.classList[k].startsWith('filter-')) {
