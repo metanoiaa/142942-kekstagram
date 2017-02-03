@@ -32,6 +32,21 @@ formClose.addEventListener('click', function () {
   formUploadOverlay.classList.add('invisible');
 });
 
+// Закрываем форму кадрирования с клавиатуры
+formClose.addEventListener('keydown', function (event) {
+  event.preventDefault();
+  if (event.keyCode === 13 || event.keyCode === 27) {
+    formUploadImage.classList.remove('invisible');
+  }
+});
+
+formClose.addEventListener('keydown', function (event) {
+  event.preventDefault();
+  if (event.keyCode === 13 || event.keyCode === 27) {
+    formUploadOverlay.classList.add('invisible');
+  }
+});
+
 // Применим фильтры к изображению
 for (var i = 0; i < filters.length; i++) {
   filters[i].addEventListener('change', function (event) {
