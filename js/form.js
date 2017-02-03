@@ -16,33 +16,21 @@ var fieldValueOfSize = document.querySelector('.upload-resize-controls-value');
 // показываем форму кадрирования изображения
 fieldUploadFile.addEventListener('change', function () {
   formUploadImage.classList.add('invisible');
-});
-
-// a форму загрузки скрываем
-fieldUploadFile.addEventListener('change', function () {
   formUploadOverlay.classList.remove('invisible');
 });
 
 // Закрываем форму кадрирования
 formClose.addEventListener('click', function () {
   formUploadImage.classList.remove('invisible');
-});
-
-formClose.addEventListener('click', function () {
   formUploadOverlay.classList.add('invisible');
 });
 
 // Закрываем форму кадрирования с клавиатуры
 formClose.addEventListener('keydown', function (event) {
   event.preventDefault();
-  if (event.keyCode === 13 || event.keyCode === 27) {
-    formUploadImage.classList.remove('invisible');
-  }
-});
 
-formClose.addEventListener('keydown', function (event) {
-  event.preventDefault();
-  if (event.keyCode === 13 || event.keyCode === 27) {
+  if (event.keyCode === 13) {
+    formUploadImage.classList.remove('invisible');
     formUploadOverlay.classList.add('invisible');
   }
 });
