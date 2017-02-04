@@ -7,6 +7,7 @@ var formClose = document.querySelector('.upload-form-cancel');
 
 var filters = document.querySelectorAll('[name=upload-filter]');
 var imagePreview = document.querySelector('.filter-image-preview');
+var filterControls = document.querySelector('.upload-filter-controls');
 
 var buttonDecreaseSize = document.querySelector('.upload-resize-controls-button-dec');
 var buttonIncreaseSize = document.querySelector('.upload-resize-controls-button-inc');
@@ -37,6 +38,18 @@ var hideFormElement = function () {
   formUploadOverlay.classList.add('invisible');
   document.removeEventListener('keydown', formKeydownHandler);
 };
+
+var clickedElement = null;
+
+var clickHandler = function (event) {
+  console.log("event");
+  if (clickedElement) {
+    clickedElement.classList.remove('clicked');
+  }
+
+  clickedElement = event.currentTarget;
+  clickedElement.classList.add('clicked');
+}
 
 // При изменении значения поля загрузки фотографии,
 // показываем форму кадрирования изображения
@@ -70,6 +83,15 @@ for (var i = 0; i < filters.length; i++) {
     imagePreview.classList.add(className);
   });
 }
+
+// Перевешиваю обработчик выбора текущего фильтра
+// с конкретного фильтра на контейнер всех фильтров
+for (var i = 0; i < filters.length; i++) {
+  filters[i].addEventListener('click', clickHandler, true);
+}
+
+filterControls.addEventListener('click', clickHandler, true);
+document.body.addEventListener('click', clickHandler, true);
 
 // Изменим масштаб изображения
 buttonDecreaseSize.addEventListener('click', function () {
