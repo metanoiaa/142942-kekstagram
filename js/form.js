@@ -39,18 +39,6 @@ var hideFormElement = function () {
   document.removeEventListener('keydown', formKeydownHandler);
 };
 
-var clickedElement = null;
-
-var clickHandler = function (event) {
-  console.log("event");
-  if (clickedElement) {
-    clickedElement.classList.remove('clicked');
-  }
-
-  clickedElement = event.currentTarget;
-  clickedElement.classList.add('clicked');
-}
-
 // При изменении значения поля загрузки фотографии,
 // показываем форму кадрирования изображения
 fieldUploadFile.addEventListener('change', function () {
@@ -70,28 +58,17 @@ formClose.addEventListener('keydown', function (event) {
 });
 
 // Применим фильтры к изображению
-for (var i = 0; i < filters.length; i++) {
-  filters[i].addEventListener('change', function (event) {
-    var className = event.target.id.replace('upload-', '');
+filterControls.addEventListener('change', function (event) {
+  var className = event.target.id.replace('upload-', '');
 
-    for (var k = 0; k < imagePreview.classList.length; k++) {
-      if (imagePreview.classList[k].startsWith('filter-')) {
-        imagePreview.classList.remove(imagePreview.classList[k]);
-      }
+  for (var k = 0; k < imagePreview.classList.length; k++) {
+    if (imagePreview.classList[k].startsWith('filter-')) {
+      imagePreview.classList.remove(imagePreview.classList[k]);
     }
+  }
 
-    imagePreview.classList.add(className);
-  });
-}
-
-// Перевешиваю обработчик выбора текущего фильтра
-// с конкретного фильтра на контейнер всех фильтров
-for (var i = 0; i < filters.length; i++) {
-  filters[i].addEventListener('click', clickHandler, true);
-}
-
-filterControls.addEventListener('click', clickHandler, true);
-document.body.addEventListener('click', clickHandler, true);
+  imagePreview.classList.add(className);
+});
 
 // Изменим масштаб изображения
 buttonDecreaseSize.addEventListener('click', function () {
