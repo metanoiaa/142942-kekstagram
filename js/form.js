@@ -12,26 +12,47 @@ var buttonDecreaseSize = document.querySelector('.upload-resize-controls-button-
 var buttonIncreaseSize = document.querySelector('.upload-resize-controls-button-inc');
 var fieldValueOfSize = document.querySelector('.upload-resize-controls-value');
 
+var ESCAPE_KEY_CODE = 27;
+var ENTER_KEY_CODE = 13;
+
+var isActivateEvent = function (event) {
+  return event.keyCode && event.keyCode === ENTER_KEY_CODE;
+};
+
+var formKeydownHandler = function (event) {
+  if (event.keyCode === ESCAPE_KEY_CODE) {
+    formUploadImage.classList.remove('invisible');
+    formUploadOverlay.classList.add('invisible');
+  }
+};
+
+var showFormElement = function () {
+  formUploadImage.classList.add('invisible');
+  formUploadOverlay.classList.remove('invisible');
+  document.addEventListener('keydown', formKeydownHandler);
+};
+
+var hideFormElement = function () {
+  formUploadImage.classList.remove('invisible');
+  formUploadOverlay.classList.add('invisible');
+  document.removeEventListener('keydown', formKeydownHandler);
+};
+
 // При изменении значения поля загрузки фотографии,
 // показываем форму кадрирования изображения
 fieldUploadFile.addEventListener('change', function () {
-  formUploadImage.classList.add('invisible');
-  formUploadOverlay.classList.remove('invisible');
+  showFormElement();
 });
 
 // Закрываем форму кадрирования
 formClose.addEventListener('click', function () {
-  formUploadImage.classList.remove('invisible');
-  formUploadOverlay.classList.add('invisible');
+  hideFormElement();
 });
 
 // Закрываем форму кадрирования с клавиатуры
 formClose.addEventListener('keydown', function (event) {
-  event.preventDefault();
-
-  if (event.keyCode === 13) {
-    formUploadImage.classList.remove('invisible');
-    formUploadOverlay.classList.add('invisible');
+  if (isActivateEvent(event)) {
+    hideFormElement();
   }
 });
 
