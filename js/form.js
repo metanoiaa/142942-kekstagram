@@ -5,7 +5,6 @@ var fieldUploadFile = formUploadImage.querySelector('#upload-file');
 var formUploadOverlay = document.querySelector('.upload-overlay');
 var formClose = document.querySelector('.upload-form-cancel');
 
-var filters = document.querySelectorAll('[name=upload-filter]');
 var imagePreview = document.querySelector('.filter-image-preview');
 var filterControls = document.querySelector('.upload-filter-controls');
 
