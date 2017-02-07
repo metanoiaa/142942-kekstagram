@@ -5,47 +5,69 @@ var fieldUploadFile = formUploadImage.querySelector('#upload-file');
 var formUploadOverlay = document.querySelector('.upload-overlay');
 var formClose = document.querySelector('.upload-form-cancel');
 
-var filters = document.querySelectorAll('[name=upload-filter]');
 var imagePreview = document.querySelector('.filter-image-preview');
+var filterControls = document.querySelector('.upload-filter-controls');
 
 var buttonDecreaseSize = document.querySelector('.upload-resize-controls-button-dec');
 var buttonIncreaseSize = document.querySelector('.upload-resize-controls-button-inc');
 var fieldValueOfSize = document.querySelector('.upload-resize-controls-value');
 
+var ESCAPE_KEY_CODE = 27;
+var ENTER_KEY_CODE = 13;
+
+var isActivateEvent = function (event) {
+  return event.keyCode && event.keyCode === ENTER_KEY_CODE;
+};
+
+var formKeydownHandler = function (event) {
+  if (event.keyCode === ESCAPE_KEY_CODE) {
+    formUploadImage.classList.remove('invisible');
+    formUploadOverlay.classList.add('invisible');
+  }
+};
+
+var showFormElement = function () {
+  formUploadImage.classList.add('invisible');
+  formUploadOverlay.classList.remove('invisible');
+  document.addEventListener('keydown', formKeydownHandler);
+};
+
+var hideFormElement = function () {
+  formUploadImage.classList.remove('invisible');
+  formUploadOverlay.classList.add('invisible');
+  document.removeEventListener('keydown', formKeydownHandler);
+};
+
 // При изменении значения поля загрузки фотографии,
 // показываем форму кадрирования изображения
 fieldUploadFile.addEventListener('change', function () {
-  formUploadImage.classList.add('invisible');
-});
-
-// a форму загрузки скрываем
-fieldUploadFile.addEventListener('change', function () {
-  formUploadOverlay.classList.remove('invisible');
+  showFormElement();
 });
 
 // Закрываем форму кадрирования
 formClose.addEventListener('click', function () {
-  formUploadImage.classList.remove('invisible');
+  hideFormElement();
 });
 
-formClose.addEventListener('click', function () {
-  formUploadOverlay.classList.add('invisible');
+// Закрываем форму кадрирования с клавиатуры
+formClose.addEventListener('keydown', function (event) {
+  if (isActivateEvent(event)) {
+    hideFormElement();
+  }
 });
 
 // Применим фильтры к изображению
-for (var i = 0; i < filters.length; i++) {
-  filters[i].addEventListener('change', function (event) {
-    var className = event.target.id.replace('upload-', '');
+filterControls.addEventListener('change', function (event) {
+  var className = event.target.id.replace('upload-', '');
 
-    for (var k = 0; k < imagePreview.classList.length; k++) {
-      if (imagePreview.classList[k].startsWith('filter-')) {
-        imagePreview.classList.remove(imagePreview.classList[k]);
-      }
+  for (var k = 0; k < imagePreview.classList.length; k++) {
+    if (imagePreview.classList[k].startsWith('filter-')) {
+      imagePreview.classList.remove(imagePreview.classList[k]);
     }
+  }
 
-    imagePreview.classList.add(className);
-  });
-}
+  imagePreview.classList.add(className);
+});
 
 // Изменим масштаб изображения
 buttonDecreaseSize.addEventListener('click', function () {
