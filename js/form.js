@@ -6,14 +6,18 @@ var formUploadOverlay = document.querySelector('.upload-overlay');
 var formClose = document.querySelector('.upload-form-cancel');
 
 var imagePreview = document.querySelector('.filter-image-preview');
-var filterControls = document.querySelector('.upload-filter-controls');
+// var filterControls = document.querySelector('.upload-filter-controls');
 
-var buttonDecreaseSize = document.querySelector('.upload-resize-controls-button-dec');
-var buttonIncreaseSize = document.querySelector('.upload-resize-controls-button-inc');
+// var buttonDecreaseSize = document.querySelector('.upload-resize-controls-button-dec');
+// var buttonIncreaseSize = document.querySelector('.upload-resize-controls-button-inc');
 var fieldValueOfSize = document.querySelector('.upload-resize-controls-value');
 
 var ESCAPE_KEY_CODE = 27;
 var ENTER_KEY_CODE = 13;
+
+var stepScale = 25;
+var minValue = 25;
+var maxValue = 100;
 
 var isActivateEvent = function (event) {
   return event.keyCode && event.keyCode === ENTER_KEY_CODE;
@@ -57,33 +61,15 @@ formClose.addEventListener('keydown', function (event) {
 });
 
 // Применим фильтры к изображению
-filterControls.addEventListener('change', function (event) {
-  var className = event.target.id.replace('upload-', '');
-
-  for (var k = 0; k < imagePreview.classList.length; k++) {
-    if (imagePreview.classList[k].startsWith('filter-')) {
-      imagePreview.classList.remove(imagePreview.classList[k]);
-    }
-  }
-
-  imagePreview.classList.add(className);
-});
+window.initializeFilters(
+  document.querySelector('.upload-filter-controls')
+  );
 
 // Изменим масштаб изображения
-buttonDecreaseSize.addEventListener('click', function () {
-  var value = parseInt(fieldValueOfSize.value, 10) - 25;
-  if (value < 25) {
-    value = 25;
-  }
-  fieldValueOfSize.value = value + '%';
-  imagePreview.style = 'transform: scale(' + value / 100 + ')';
-});
+window.createScale(
+  document.querySelector('.upload-resize-controls-button-dec')
+  );
 
-buttonIncreaseSize.addEventListener('click', function () {
-  var value = parseInt(fieldValueOfSize.value, 10) + 25;
-  if (value > 100) {
-    value = 100;
-  }
-  fieldValueOfSize.value = value + '%';
-  imagePreview.style = 'transform: scale(' + value / 100 + ')';
-});
+window.createScale(
+  document.querySelector('.upload-resize-controls-button-inc')
+  );
