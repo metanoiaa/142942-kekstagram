@@ -5,19 +5,10 @@ var fieldUploadFile = formUploadImage.querySelector('#upload-file');
 var formUploadOverlay = document.querySelector('.upload-overlay');
 var formClose = document.querySelector('.upload-form-cancel');
 
-var imagePreview = document.querySelector('.filter-image-preview');
-// var filterControls = document.querySelector('.upload-filter-controls');
-
-// var buttonDecreaseSize = document.querySelector('.upload-resize-controls-button-dec');
-// var buttonIncreaseSize = document.querySelector('.upload-resize-controls-button-inc');
-var fieldValueOfSize = document.querySelector('.upload-resize-controls-value');
+var uploadControls = document.querySelector('.upload-resize-controls');
 
 var ESCAPE_KEY_CODE = 27;
 var ENTER_KEY_CODE = 13;
-
-var stepScale = 25;
-var minValue = 25;
-var maxValue = 100;
 
 var isActivateEvent = function (event) {
   return event.keyCode && event.keyCode === ENTER_KEY_CODE;
@@ -62,14 +53,8 @@ formClose.addEventListener('keydown', function (event) {
 
 // Применим фильтры к изображению
 window.initializeFilters(
-  document.querySelector('.upload-filter-controls')
+    document.querySelector('.upload-filter-controls')
   );
 
 // Изменим масштаб изображения
-window.createScale(
-  document.querySelector('.upload-resize-controls-button-dec')
-  );
-
-window.createScale(
-  document.querySelector('.upload-resize-controls-button-inc')
-  );
+window.createScale(uploadControls, 25, 25);
