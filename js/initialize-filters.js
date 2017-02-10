@@ -1,7 +1,9 @@
 'use strict';
 
+var imagePreview = document.querySelector('.filter-image-preview');
+
 // Применим фильтры к изображению
-window.initializeFilters = function (element) {
+window.initializeFilters = function () {
   document.addEventListener('change', function (event) {
     var className = event.target.id.replace('upload-', '');
 
