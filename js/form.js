@@ -57,4 +57,4 @@ window.initializeFilters(
   );
 
 // Изменим масштаб изображения
-window.createScale(uploadControls, 25, 25);
+window.createScale(uploadControls, 25, 100);
