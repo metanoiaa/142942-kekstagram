@@ -1,22 +1,34 @@
 'use strict';
 
+var fieldValueOfSize = document.querySelector('.upload-resize-controls-value');
+var setValue = function (value) {
+  fieldValueOfSize.value = value + '%';
+  window.imagePreview.style.transform = 'scale(' + value / 100 + ')';
+};
+
 // Изменим масштаб изображения
-window.createScale = function (element, stepScale, value) {
-  document.addEventListener('click', function () {
-    var value = parseInt(fieldValueOfSize.value, 10) - stepScale;
-    if (value < minValue) {
-      value = minValue;
+window.createScale = function (element, step, value) {
+  setValue(value);
+
+  element.addEventListener('click', function (event) {
+    if (event.target.id === 'button-dec') {
+      value = value - step;
+      if (value < 25) {
+        value = 25;
+      }
+
+      setValue(value);
     }
-    fieldValueOfSize.value = value + '%';
-    imagePreview.style = 'transform: scale(' + value / 100 + ')';
   });
 
-  document.addEventListener('click', function () {
-    var value = parseInt(fieldValueOfSize.value, 10) + stepScale;
-    if (value > maxValue) {
-      value = maxValue;
+  element.addEventListener('click', function (event) {
+    if (event.target.id === 'button-inc') {
+      value = value + step;
+      if (value > 100) {
+        value = 100;
+      }
+
+      setValue(value);
     }
-    fieldValueOfSize.value = value + '%';
-    imagePreview.style = 'transform: scale(' + value / 100 + ')';
   });
 };
