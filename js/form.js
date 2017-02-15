@@ -48,11 +48,11 @@
   });
 
   // Применим фильтры к изображению
-  window.initializeFilters(
+  window.setFilters.initializeFilters(
       document.querySelector('.upload-filter-controls')
     );
 
   // Изменим масштаб изображения
-  window.createScale(uploadControls, 25, 100);
+  window.controlScale.createScale(uploadControls, 25, 100);
 })();
 

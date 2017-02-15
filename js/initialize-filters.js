@@ -1,10 +1,10 @@
 'use strict';
 
-(function () {
+window.setFilters = (function () {
   var imagePreview = document.querySelector('.filter-image-preview');
 
   // Применим фильтры к изображению
-  window.initializeFilters = function () {
+  var initializeFilters = function () {
     document.addEventListener('change', function (event) {
       var className = event.target.id.replace('upload-', '');
 
@@ -17,5 +17,9 @@
       imagePreview.classList.add(className);
     });
   };
+
+  return {
+    initializeFilters: initializeFilters
+  }
 })();
 
