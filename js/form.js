@@ -42,13 +42,13 @@
 
   // Закрываем форму кадрирования с клавиатуры
   formClose.addEventListener('keydown', function (event) {
-    if (window.utils.isActivateEvent(event)) {
+    if (window.isActivateEvent(event)) {
       hideFormElement();
     }
   });
 
   // Применим фильтры к изображению
-  window.setFilters.initializeFilters(
+  window.initializeFilters(
       document.querySelector('.upload-filter-controls')
     );
 
