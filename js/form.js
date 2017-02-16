@@ -53,6 +53,6 @@
     );
 
   // Изменим масштаб изображения
-  window.controlScale.createScale(uploadControls, 25, 100);
+  window.createScale(uploadControls, 25, 100);
 })();
 
