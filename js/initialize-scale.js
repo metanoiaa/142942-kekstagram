@@ -1,16 +1,8 @@
 'use strict';
 
 window.createScale = (function () {
-  var fieldValueOfSize = document.querySelector('.upload-resize-controls-value');
-  var imagePreview = document.querySelector('.filter-image-preview');
-
-  var setValue = function (value) {
-    fieldValueOfSize.value = value + '%';
-    imagePreview.style.transform = 'scale(' + value / 100 + ')';
-  };
-
-  return function (element, step, value) {
-    setValue(value);
+  return function (element, step, value, callback) {
+    callback(value);
 
     element.addEventListener('click', function (event) {
       if (event.target.id === 'button-dec') {
@@ -19,7 +11,7 @@ window.createScale = (function () {
           value = 25;
         }
 
-        setValue(value);
+        callback(value);
       }
     });
 
@@ -30,7 +22,7 @@ window.createScale = (function () {
           value = 100;
         }
 
-        setValue(value);
+        callback(value);
       }
     });
   };
