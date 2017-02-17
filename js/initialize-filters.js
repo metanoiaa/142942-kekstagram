@@ -3,11 +3,11 @@
 window.initializeFilters = (function () {
 
   // Применим фильтры к изображению
-  return function (className, callback) {
+  return function (uploadFilterControls, callback) {
 
-    document.addEventListener('change', function (event) {
-      var className = event.target.id.replace('upload-', '');
-      callback(className);
+    uploadFilterControls.addEventListener('change', function (event) {
+      uploadFilterControls = event.target.id.replace('upload-', '');
+      callback(uploadFilterControls);
     });
   };
 })();

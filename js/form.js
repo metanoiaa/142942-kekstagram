@@ -19,14 +19,14 @@
     imagePreview.style.transform = 'scale(' + value / 100 + ')';
   };
 
-  var applyFilters = function (className) {
+  var applyFilters = function () {
     for (var k = 0; k < imagePreview.classList.length; k++) {
       if (imagePreview.classList[k].startsWith('filter-')) {
         imagePreview.classList.remove(imagePreview.classList[k]);
       }
     }
 
-    imagePreview.classList.add(className);
+    imagePreview.classList.add();
   };
 
   var formKeydownHandler = function (event) {
