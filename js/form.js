@@ -7,8 +7,27 @@
   var formClose = document.querySelector('.upload-form-cancel');
 
   var uploadControls = document.querySelector('.upload-resize-controls');
+  var uploadFilterControls = document.querySelector('.upload-filter-controls');
 
   var ESCAPE_KEY_CODE = 27;
+
+  var fieldValueOfSize = document.querySelector('.upload-resize-controls-value');
+  var imagePreview = document.querySelector('.filter-image-preview');
+
+  var setValue = function (value) {
+    fieldValueOfSize.value = value + '%';
+    imagePreview.style.transform = 'scale(' + value / 100 + ')';
+  };
+
+  var applyFilters = function () {
+    for (var k = 0; k < imagePreview.classList.length; k++) {
+      if (imagePreview.classList[k].startsWith('filter-')) {
+        imagePreview.classList.remove(imagePreview.classList[k]);
+      }
+    }
+
+    imagePreview.classList.add();
+  };
 
   var formKeydownHandler = function (event) {
     if (event.keyCode === ESCAPE_KEY_CODE) {
@@ -48,11 +67,8 @@
   });
 
   // Применим фильтры к изображению
-  window.initializeFilters(
-      document.querySelector('.upload-filter-controls')
-    );
+  window.initializeFilters(uploadFilterControls, applyFilters);
 
   // Изменим масштаб изображения
-  window.createScale(uploadControls, 25, 100);
+  window.createScale(uploadControls, 25, 100, setValue);
 })();
-
