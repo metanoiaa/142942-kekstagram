@@ -71,4 +71,10 @@
 
   // Изменим масштаб изображения
   window.createScale(uploadControls, 25, 100, setValue);
+
+  window.load(function (event) {
+    formUploadImage.innerHTML = '';
+    console.log(event);
+    formUploadImage.innerHTML += event.target.response;
+  });
 })();
