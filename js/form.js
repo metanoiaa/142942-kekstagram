@@ -74,7 +74,6 @@
 
   window.load(function (event) {
     formUploadOverlay.innerHTML = '';
-    console.log(event);
     formUploadOverlay.innerHTML += event.target.response;
   });
 })();
