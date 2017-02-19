@@ -73,8 +73,8 @@
   window.createScale(uploadControls, 25, 100, setValue);
 
   window.load(function (event) {
-    formUploadImage.innerHTML = '';
+    formUploadOverlay.innerHTML = '';
     console.log(event);
-    formUploadImage.innerHTML += event.target.response;
+    formUploadOverlay.innerHTML += event.target.response;
   });
 })();
