@@ -1,15 +1,21 @@
 'use strict';
 
 window.load = (function () {
+  var pictures = [];
+
   var DATA_URL = 'https://intensive-javascript-server-myophkugvq.now.sh/kekstagram/data';
 
-  return function (onLoad) {
-    var xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', onLoad);
+  var xhr = new XMLHttpRequest();
 
-    xhr.responseType = 'json';
+  xhr.open('GET', DATA_URL);
 
-    xhr.open('GET', DATA_URL);
-    xhr.send();
-  };
+  xhr.addEventListener('load', function (event) {
+    try {
+      pictures = JSON.parse(event.target.response);
+      document.write(JSON.stringify(pictures));
+    } catch(err) {}
+  });
+
+  xhr.send();
 })();
+
