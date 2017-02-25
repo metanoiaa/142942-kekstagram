@@ -6,8 +6,8 @@ window.initializeFilters = (function () {
   return function (uploadFilterControls, callback) {
 
     uploadFilterControls.addEventListener('change', function (event) {
-      uploadFilterControls = event.target.id.replace('upload-', '');
-      callback(uploadFilterControls);
+      var className = event.target.id.replace('upload-', '');
+      callback(className);
     });
   };
 })();
